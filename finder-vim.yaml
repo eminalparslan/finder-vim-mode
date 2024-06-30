@@ -266,6 +266,19 @@ rules:
           - *insert-notice
           - *enter-insert-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
+      # INSERT MODE KEYBINDS
+      # Delete word
+      - type: basic
+        from: { key_code: w, modifiers: { mandatory: [control] } }
+        to:
+          - { key_code: delete_or_backspace, modifiers: [option] }
+        conditions: [*finder-app, *is-insert-mode]
+      # Delete to start of line
+      - type: basic
+        from: { key_code: u, modifiers: { mandatory: [control] } }
+        to:
+          - { key_code: delete_or_backspace, modifiers: [command] }
+        conditions: [*finder-app, *is-insert-mode]
       # LEAVE INSERT MODE
       # Confirm Insert Mode
       - type: basic

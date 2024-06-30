@@ -1,3 +1,4 @@
+- Search mode rsi bindings (C-w, C-u)
 - "qwerty" keyboard cheatsheet
 - Iterate through sidebar folders (with square brackets?)
 - Fix new tab messing up window arrangement bug (might be yabai related)

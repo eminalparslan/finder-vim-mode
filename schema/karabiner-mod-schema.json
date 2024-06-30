@@ -376,6 +376,26 @@
             "required": [],
             "title": "ToIfHeldDown"
         },
+        "ToDelayedAction": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "to_if_invoked": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PurpleTo"
+                    }
+                },
+                "to_if_canceled": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PurpleTo"
+                    }
+                }
+            },
+            "required": [],
+            "title": "ToDelayedAction"
+        },
         "AnchorTo": {
             "type": "object",
             "additionalProperties": false,
@@ -451,6 +471,9 @@
                     "items": {
                         "$ref": "#/definitions/PurpleTo"
                     }
+                },
+                "to_delayed_action": {
+                    "$ref": "#/definitions/ToDelayedAction"
                 }
             },
             "required": [],

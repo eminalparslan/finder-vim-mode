@@ -801,6 +801,13 @@
           },
           "to": [
             {
+              "key_code": "c",
+              "modifiers": [
+                "option",
+                "command"
+              ]
+            },
+            {
               "key_code": "g",
               "modifiers": [
                 "command",
@@ -820,6 +827,24 @@
               }
             }
           ],
+          "to_delayed_action": {
+            "to_if_invoked": [
+              {
+                "key_code": "v",
+                "modifiers": [
+                  "command"
+                ]
+              }
+            ],
+            "to_if_canceled": [
+              {
+                "key_code": "v",
+                "modifiers": [
+                  "command"
+                ]
+              }
+            ]
+          },
           "conditions": [
             {
               "type": "frontmost_application_if",

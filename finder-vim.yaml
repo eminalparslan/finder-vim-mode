@@ -248,9 +248,15 @@ rules:
       - type: basic
         from: { key_code: slash }
         to:
+          - { key_code: c, modifiers: [option, command]}
           - { key_code: g, modifiers: [command, shift] }
           - *insert-notice
           - *enter-insert-mode
+        to_delayed_action:
+          to_if_invoked:
+            - { key_code: v, modifiers: [command] }
+          to_if_canceled:
+            - { key_code: v, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
         # Search (for people using regular shortcuts)
       - type: basic
@@ -1314,7 +1320,7 @@ rules:
       - type: basic
         from: { key_code: p, modifiers: { mandatory: [control] } }
         to:
-          - { key_code: "c", modifiers: [option, command] }
+          - { key_code: c, modifiers: [option, command] }
           - shell_command: |
               sleep 0.1 # wait for clipboard
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \

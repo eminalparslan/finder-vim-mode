@@ -248,7 +248,7 @@ rules:
       - type: basic
         from: { key_code: slash }
         to:
-          - { key_code: f, modifiers: [command] }
+          - { key_code: g, modifiers: [command, shift] }
           - *insert-notice
           - *enter-insert-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]

@@ -801,9 +801,10 @@
           },
           "to": [
             {
-              "key_code": "f",
+              "key_code": "g",
               "modifiers": [
-                "command"
+                "command",
+                "shift"
               ]
             },
             {

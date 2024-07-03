@@ -500,6 +500,21 @@ rules:
         to:
           - { key_code: down_arrow, modifiers: [shift] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # <C-Space> = deselect current file and add down to selection
+      - type: basic
+        from: { key_code: spacebar, modifiers: { mandatory: [control] } }
+        to:
+          - { key_code: down_arrow, modifiers: [shift] }
+          - shell_command: |
+              osascript -e '
+                tell application "Finder"
+                  set theSelection to selection
+                  if length of theSelection ≤ 2 then
+                    return
+                  end if
+                  set selection to (items 1 thru -3 of theSelection) & {(item -1 of theSelection)}
+                end tell'
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # q = right-click / Context Menu
       - type: basic

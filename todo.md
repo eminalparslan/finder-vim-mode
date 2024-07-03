@@ -2,3 +2,5 @@
 - Iterate through sidebar folders (with square brackets?)
 - Pressing arrow keys twice will reverse direction of sorting
 - Fix 't'
+- Keybind to disable sorting
+  - https://apple.stackexchange.com/a/74072

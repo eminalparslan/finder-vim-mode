@@ -1,4 +1,4 @@
 - "qwerty" keyboard cheatsheet
 - Iterate through sidebar folders (with square brackets?)
-- Fix new tab messing up window arrangement bug (might be yabai related)
 - Pressing arrow keys twice will reverse direction of sorting
+- Fix 't'

@@ -373,18 +373,18 @@ rules:
         to:
           - shell_command: |
               current_win=$(osascript -e '
-                tell application "Finder" 
-                	activate 
-                	if (count Finder windows) is 0 then return "" 
-                	try 
-                		set pathToBeClosed to (POSIX path of (insertion location as alias)) 
-                		close window 1 
-                		return pathToBeClosed 
+                tell application "Finder"
+                	activate
+                	if (count Finder windows) is 0 then return ""
+                	try
+                		set pathToBeClosed to (POSIX path of (insertion location as alias))
+                		close window 1
+                		return pathToBeClosed
                 	on error # special folders without insertion location, like Smart Folders
-                		close window 1 
-                		return "" 
-                	end try 
-                end tell 
+                		close window 1
+                		return ""
+                	end try
+                end tell
               ')
               if [[ -n "$current_win" ]] ; then
                 mkdir -p "$HOME/.cache/finder-vim-mode"
@@ -406,18 +406,18 @@ rules:
         to:
           - shell_command: |
               current_win=$(osascript -e '
-                tell application "Finder" 
-                	activate 
-                	if (count Finder windows) is 0 then return "" 
-                	try 
-                		set pathToBeClosed to (POSIX path of (insertion location as alias)) 
-                		close window 1 
-                		return pathToBeClosed 
+                tell application "Finder"
+                	activate
+                	if (count Finder windows) is 0 then return ""
+                	try
+                		set pathToBeClosed to (POSIX path of (insertion location as alias))
+                		close window 1
+                		return pathToBeClosed
                 	on error # special folders without insertion location, like Smart Folders
-                		close window 1 
-                		return "" 
-                	end try 
-                end tell 
+                		close window 1
+                		return ""
+                	end try
+                end tell
               ')
               if [[ -n "$current_win" ]] ; then
                 mkdir -p "$HOME/.cache/finder-vim-mode"
@@ -729,6 +729,31 @@ rules:
                   end if
                 end tell
               ")
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # F = Flatten directories
+      - type: basic
+        from: { key_code: f, modifiers: { mandatory: [shift] } }
+        to:
+          - shell_command: |
+              selectedFiles=$(osascript -e '
+              	tell application "Finder" to set selectedFiles to (every item of (get selection))
+              	set out to ""
+              	repeat with theFile in selectedFiles
+              		set out to out & (POSIX path of (theFile as text)) & linefeed
+              	end repeat
+              	return out
+              ')
+              [[ -z "$selectedFiles" ]] && return 1
+
+              parent_dir=$(dirname "$(echo "$selectedFiles" | head -n1)")
+
+              echo "$selectedFiles" | while read -r item; do
+              	[[ ! -d "$item" ]] && continue
+              	find "$item" -mindepth 1 -print0 -not -type d |
+              		xargs -0 -I {} mv -n "{}" "$parent_dir"
+                find "$item" -print0 -type d | xargs -0 rmdir
+              done
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # u = undo
       - type: basic

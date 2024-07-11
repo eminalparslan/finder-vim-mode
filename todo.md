@@ -1,6 +1,7 @@
-- "qwerty" keyboard cheatsheet
-- Iterate through sidebar folders (with square brackets?)
+- Fix 'm' (not Karabiner related)
 - Pressing arrow keys twice will reverse direction of sorting
+  - Keybind to disable sorting
+    - https://apple.stackexchange.com/a/74072
 - Fix 't'
-- Keybind to disable sorting
-  - https://apple.stackexchange.com/a/74072
+- Iterate through sidebar folders (with square brackets?)
+- "qwerty" keyboard cheatsheet

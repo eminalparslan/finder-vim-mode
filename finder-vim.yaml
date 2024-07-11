@@ -1452,3 +1452,11 @@ rules:
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                   --title "✅ GitHub URL copied" --message "$URL"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # ctrl-k: open current directory in terminal
+      - type: basic
+        from: { key_code: k, modifiers: { mandatory: [control] } }
+        to:
+          - shell_command: |
+              DIR=$(osascript -e 'tell application "Finder" to return POSIX path of (target of window 1 as alias)')
+              open -a kitty "$DIR"
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]

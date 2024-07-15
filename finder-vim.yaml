@@ -1184,8 +1184,8 @@ rules:
         from: { key_code: p }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active]
         to:
-          - key_code: v
-            modifiers: [command, option]
+          - shell_command: |
+              osascript -e 'tell application "System Events" to tell process "Finder" to click menu item "Move Item Here" of menu "Edit" of menu bar 1'
           - *end-move
           - *remove-move-notice
       - type: basic
@@ -1194,8 +1194,8 @@ rules:
           modifiers: { mandatory: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active]
         to:
-          - key_code: v
-            modifiers: [command, option]
+          - shell_command: |
+              osascript -e 'tell application "System Events" to tell process "Finder" to click menu item "Move Item Here" of menu "Edit" of menu bar 1'
           - *end-move
           - *remove-move-notice
       # y / cmd+c = yank, which also aborts move

@@ -5019,11 +5019,7 @@
           ],
           "to": [
             {
-              "key_code": "v",
-              "modifiers": [
-                "command",
-                "option"
-              ]
+              "shell_command": "osascript -e 'tell application \"System Events\" to tell process \"Finder\" to click menu item \"Move Item Here\" of menu \"Edit\" of menu bar 1'\n"
             },
             {
               "set_variable": {

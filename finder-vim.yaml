@@ -770,6 +770,14 @@ rules:
               done
               afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # ö (de) / ; (en) = toggle grouping
+      - type: basic
+        from: { key_code: semicolon } # ö in German
+        to_if_alone:
+          - { key_code: "0", modifiers: [command, control] }
+        # No keyboard-specific condition needed, since it's the same key
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      - type: basic
       # u = undo
       - type: basic
         from: { key_code: u }

@@ -2611,6 +2611,42 @@
         {
           "type": "basic",
           "from": {
+            "key_code": "semicolon"
+          },
+          "to_if_alone": [
+            {
+              "key_code": "0",
+              "modifiers": [
+                "command",
+                "control"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_unless",
+              "name": "FINDER_FIND_MODE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic"
+        },
+        {
+          "type": "basic",
+          "from": {
             "key_code": "u"
           },
           "to_if_alone": [
@@ -5070,11 +5106,7 @@
           ],
           "to": [
             {
-              "key_code": "v",
-              "modifiers": [
-                "command",
-                "option"
-              ]
+              "shell_command": "osascript -e 'tell application \"System Events\" to tell process \"Finder\" to click menu item \"Move Item Here\" of menu \"Edit\" of menu bar 1'\n"
             },
             {
               "set_variable": {

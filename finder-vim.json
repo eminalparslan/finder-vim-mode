@@ -2642,7 +2642,38 @@
           ]
         },
         {
-          "type": "basic"
+          "type": "basic",
+          "from": {
+            "key_code": "v",
+            "modifiers": {
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "to_if_alone": [
+            {
+              "shell_command": "first_volume=$(df | grep --max-count=1 \" /Volumes/\" | awk -F '   ' '{print $NF}')\n[[ -z \"$first_volume\" ]] && \"$HOME/.config/karabiner/assets/finder-vim-mode/notificator\" \\\n  --title \"Finder Vim Mode\" --message \"No ejectable volume found.\"\nerror=$(osascript -e \"\n  set the_volume to (\\\"$first_volume\\\" as POSIX file)\n  tell application \\\"Finder\\\" to open the_volume \n\")\n"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_unless",
+              "name": "FINDER_FIND_MODE",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
@@ -3050,7 +3081,7 @@
           },
           "to_if_alone": [
             {
-              "shell_command": "SEL=$(osascript -e 'tell application \"Finder\" to POSIX path of (item 1 of (get selection) as text)')\nselection_count=$(osascript -e 'tell application \"Finder\" to count (selection as list)')\n\nif [[ -d \"$SEL\" && $selection_count -eq 1 ]] ; then\n  cd \"$SEL\"\n  foldername=$(basename \"$SEL\")\n  zip -r \"../$foldername.zip\" .\n  open -R \"../$foldername.zip\"\n\n  current_vol=$(osascript -e 'output volume of (get volume settings)')\n  vol_percent=$(echo \"scale=2 ; $current_vol / 100\" | bc) # afplay play with 100% volume by default\n  (afplay --volume \"$vol_percent\" \"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif\" &)\nelse\n  osascript -e '\n    tell application \"System Events\" to tell process \"Finder\"\n      click menu item \"Compress\" of menu \"File\" of menu bar 1\n    end tell'\nfi\n"
+              "shell_command": "SEL=$(osascript -e 'tell application \"Finder\" to POSIX path of (item 1 of (get selection) as text)')\nselection_count=$(osascript -e 'tell application \"Finder\" to count (selection as list)')\n\nif [[ -d \"$SEL\" && $selection_count -eq 1 ]] ; then\n  cd \"$SEL\"\n  foldername=$(basename \"$SEL\")\n  zip --recurse-paths --symlinks \"../$foldername.zip\" .\n  open -R \"../$foldername.zip\"\n\n  current_vol=$(osascript -e 'output volume of (get volume settings)')\n  vol_percent=$(echo \"scale=2 ; $current_vol / 100\" | bc) # afplay play with 100% volume by default\n  (afplay --volume \"$vol_percent\" \"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif\" &)\nelse\n  osascript -e '\n    tell application \"System Events\" to tell process \"Finder\"\n      click menu item \"Compress\" of menu \"File\" of menu bar 1\n    end tell'\nfi\n"
             }
           ],
           "conditions": [
@@ -3087,7 +3118,7 @@
           },
           "to": [
             {
-              "shell_command": "SEL=$(osascript -e 'tell application \"Finder\" to POSIX path of (item 1 of (get selection) as text)')\nselection_count=$(osascript -e 'tell application \"Finder\" to count (selection as list)')\n\nif [[ -d \"$SEL\" && $selection_count -eq 1 ]] ; then\n  cd \"$SEL\"\n  foldername=$(basename \"$SEL\")\n  zip -r \"../$foldername.zip\" .\n  open -R \"../$foldername.zip\"\n\n  current_vol=$(osascript -e 'output volume of (get volume settings)')\n  vol_percent=$(echo \"scale=2 ; $current_vol / 100\" | bc) # afplay play with 100% volume by default\n  (afplay --volume \"$vol_percent\" \"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif\" &)\nelse\n  osascript -e '\n    tell application \"System Events\" to tell process \"Finder\"\n      click menu item \"Compress\" of menu \"File\" of menu bar 1\n    end tell'\nfi\n"
+              "shell_command": "SEL=$(osascript -e 'tell application \"Finder\" to POSIX path of (item 1 of (get selection) as text)')\nselection_count=$(osascript -e 'tell application \"Finder\" to count (selection as list)')\n\nif [[ -d \"$SEL\" && $selection_count -eq 1 ]] ; then\n  cd \"$SEL\"\n  foldername=$(basename \"$SEL\")\n  zip --recurse-paths --symlinks \"../$foldername.zip\" .\n  open -R \"../$foldername.zip\"\n\n  current_vol=$(osascript -e 'output volume of (get volume settings)')\n  vol_percent=$(echo \"scale=2 ; $current_vol / 100\" | bc) # afplay play with 100% volume by default\n  (afplay --volume \"$vol_percent\" \"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif\" &)\nelse\n  osascript -e '\n    tell application \"System Events\" to tell process \"Finder\"\n      click menu item \"Compress\" of menu \"File\" of menu bar 1\n    end tell'\nfi\n"
             }
           ],
           "conditions": [

@@ -164,27 +164,19 @@ rules:
                   end if
                 end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # J: 6j
+      # J: select down
       - type: basic
         from: { key_code: j, modifiers: { mandatory: [shift] } }
         to:
           - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
+            modifiers: [shift]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # K: 6k
+      # K: select up
       - type: basic
         from: { key_code: k, modifiers: { mandatory: [shift] } }
         to:
           - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
+            modifiers: [shift]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # g(g), G,
       - type: basic
